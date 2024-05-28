@@ -53,6 +53,7 @@ export class MainFormComponent implements OnInit {
   ];
 
   onSubmit() {
+    this.displaySpinner = true;
     if (!this.form.valid) {
       return;
     }
@@ -74,13 +75,17 @@ export class MainFormComponent implements OnInit {
   getConfiguration(url: string) {
     let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?url=' + encodeURIComponent(url);
     fetch(myurl).then(function(response) {
+      
       //alert('Configuration loaded from\n\n' + url);
       response.json().then(function(json) {
         //alert("here is your json");
       });
     }).catch(function(e) {
       alert('Failed to load configuration from\n\n' + url + '\n\n' + e.toString());
-    });
+    }).finally(() => {
+      this.displaySpinner = false;
+      this.displayV = true;
+    })
   }
 }
 
