@@ -86,7 +86,11 @@ export class MainFormComponent implements OnInit {
     + encodeURIComponent(url);
     this.state = this.STATE_LOADING;
     fetch(myurl).then((response) => {
-      
+      if (response.status !== 200) {
+        alert('Failed to load configuration from\n\n' + url + '\n\nHTTP status ' + response.status);
+        this.state = this.STATE_INIT;
+        return;
+      }
       //alert('Configuration loaded from\n\n' + url);
       response.json().then((json) => {
         if(this.id == 1){
