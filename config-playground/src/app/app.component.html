@@ -10,5 +10,13 @@
     <app-main-form [id]= "2"></app-main-form>
   </div>
 </div>
-<app-filter-pagination-table></app-filter-pagination-table>
+
+<div>
+  <span *ngIf="canCompare()" style="color:green">READY</span>
+  <span *ngIf="!canCompare()" style="color:read">NOT READY</span>
+</div>
+<button mat-button (click)="findDifferences()" [disabled]="!canCompare()">Find Differences</button>
+
+<app-filter-pagination-table>
+</app-filter-pagination-table>
 

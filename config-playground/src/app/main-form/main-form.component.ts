@@ -25,8 +25,12 @@ export class MainFormComponent implements OnInit {
     institution: '49HBZ_FDO',
     view: 'VU1'
   };
-  displayV : boolean = false;
-  displaySpinner: boolean = false;
+  STATE_INIT: number = 0;
+  STATE_LOADING: number = 1;
+  STATE_LOADED: number = 2;
+  state: number = this.STATE_INIT;
+  //displayV : boolean = false;
+  //displaySpinner: boolean = false;
   fields: FormlyFieldConfig[] = [
     {
       key: 'domain',
@@ -58,7 +62,7 @@ export class MainFormComponent implements OnInit {
   ];
 
   onSubmit() {
-    this.displaySpinner = true;
+    //this.displaySpinner = true;
     if (!this.form.valid) {
       return;
     }
@@ -80,6 +84,7 @@ export class MainFormComponent implements OnInit {
   getConfiguration(url: string) {
     let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?institute=TRAINING_1_INST&url='
     + encodeURIComponent(url);
+    this.state = this.STATE_LOADING;
     fetch(myurl).then((response) => {
       
       //alert('Configuration loaded from\n\n' + url);
@@ -89,12 +94,20 @@ export class MainFormComponent implements OnInit {
         }else if(this.id === 2){
           this.appService.view2JSON = json
         }
+        this.state = this.STATE_LOADED;
       
         //alert("here is your json");
       });
     }).catch(function(e) {
       alert('Failed to load configuration from\n\n' + url + '\n\n' + e.toString());
     });
+  }
+
+  isLoaded(): boolean {
+    return this.state === this.STATE_LOADED;
+  }
+  isLoading(): boolean {
+    return this.state === this.STATE_LOADING;
   }
 }
 
