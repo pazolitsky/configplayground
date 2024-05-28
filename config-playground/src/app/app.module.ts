@@ -14,6 +14,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FilterPaginationTableComponent } from './filter-pagination-table/filter-pagination-table.component'; // Add this import
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -31,8 +34,11 @@ import { FilterPaginationTableComponent } from './filter-pagination-table/filter
     MatButtonModule,
     MatGridListModule,
     MatTableModule,
-    MatPaginatorModule 
-  
+    MatPaginatorModule ,
+    MatProgressSpinnerModule,
+    MatIconModule
+  ,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
