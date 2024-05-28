@@ -78,7 +78,9 @@ export class MainFormComponent implements OnInit {
   }
 
   getConfiguration(url: string) {
-      let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?institute=TRAINING_1_INST&url=' + encodeURIComponent(url);  fetch(myurl).then((response) => {
+    let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?institute=TRAINING_1_INST&url='
+    + encodeURIComponent(url);
+    fetch(myurl).then((response) => {
       
       //alert('Configuration loaded from\n\n' + url);
       response.json().then((json) => {

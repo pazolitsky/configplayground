@@ -1,6 +1,6 @@
 
-<div *ngIf="differences.length>0 else noDifferences">
-  
+<div *ngIf="differences && view1Json && view2Json else noDifferences">
+
     <mat-form-field >
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
@@ -41,6 +41,7 @@
     </div>
     
     <ng-template #noDifferences>
-      <h2>No differences found.</h2>
+        <button mat-button (click)="onbtnCLicked()">Find Differences</button>
     </ng-template>
+
     
