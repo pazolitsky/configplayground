@@ -72,7 +72,7 @@ export class MainFormComponent implements OnInit {
   }
 
   getConfiguration(url: string) {
-    let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?url=' + encodeURIComponent(url);
+    let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?institute=TRAINING_1_INST&url=' + encodeURIComponent(url);
     fetch(myurl).then(function(response) {
       //alert('Configuration loaded from\n\n' + url);
       response.json().then(function(json) {
@@ -80,7 +80,9 @@ export class MainFormComponent implements OnInit {
       });
     }).catch(function(e) {
       alert('Failed to load configuration from\n\n' + url + '\n\n' + e.toString());
-    });
+    }).finally(function() {
+
+    })
   }
 }
 
