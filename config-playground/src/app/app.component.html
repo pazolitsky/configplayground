@@ -1,3 +1,4 @@
 <h1>Welcome to Primo VE Configuration Playground</h1>
 <app-main-form></app-main-form>
+<div *ngIf="differences" [innerHTML]="generateDifferenceTable(differences)"></div>
 
