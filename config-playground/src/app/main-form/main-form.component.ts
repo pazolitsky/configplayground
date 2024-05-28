@@ -20,6 +20,8 @@ export class MainFormComponent implements OnInit {
     institution: '49HBZ_FDO',
     view: 'VU1'
   };
+  displayV : boolean = false;
+  displaySpinner: boolean = false;
   fields: FormlyFieldConfig[] = [
     {
       key: 'domain',

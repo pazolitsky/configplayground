@@ -1,4 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
     <button mat-button type="submit" class="btn btn-default">Get Configuration</button>
+    <div style="justify-content: center; display: flex;" *ngIf="displaySpinner">
+       <mat-spinner></mat-spinner> 
+    </div>
+    <div *ngIf="displayV">
+        <mat-icon   style="color: green; font-size: 50px;     width: auto; height: auto;"aria-hidden="false" aria-label="Example home icon" fontIcon="check_circle_outline"></mat-icon>
+    </div>
+    
+
 </form>
