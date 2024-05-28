@@ -9,6 +9,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     FormlyModule.forRoot(),
     FormlyMaterialModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

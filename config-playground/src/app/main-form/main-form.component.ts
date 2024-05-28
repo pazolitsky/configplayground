@@ -15,7 +15,11 @@ export class MainFormComponent implements OnInit {
   }
 
   form = new FormGroup({});
-  model = { input1: '', input2: '', input3: '' };
+  model = {
+    domain: 'sqa-eu04.alma.exlibrisgroup.com',
+    institution: '49HBZ_FDO',
+    view: 'VU1'
+  };
   fields: FormlyFieldConfig[] = [
     {
       key: 'domain',
@@ -47,11 +51,31 @@ export class MainFormComponent implements OnInit {
   ];
 
   onSubmit() {
-    if (this.form.valid) {
-      confirm('Configuration submitted!');
+    if (!this.form.valid) {
+      return;
     }
+    let url = this.makeConfigUrl(this.model.domain, this.model.institution, this.model.view);
+    this.getConfiguration(url);
   }
 
+  makeConfigUrl(domain: string, institution: string, view: string) : string {
+    if (!/^https?:\/\//.test(domain)) {
+      domain = 'https://'+ domain;
+    }
+    if (!/\/$/.test(domain)) {
+      domain += '/';
+    }
+    let url = `${domain}primaws/rest/pub/configuration/vid/${institution}:${view}`
+    return url;
+  }
+
+  getConfiguration(url: string) {
+    fetch(url, {mode: 'no-cors'}).then(function(response) {
+      alert('Configuration loaded from\n\n' + url);
+    }).catch(function(e) {
+      alert('Failed to load configuration from\n\n' + url + '\n\n' + e.toString());
+    });
+  }
 }
 
 
