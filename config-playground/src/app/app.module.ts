@@ -11,11 +11,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FilterPaginationTableComponent } from './filter-pagination-table/filter-pagination-table.component'; // Add this import
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainFormComponent
+    MainFormComponent,
+    FilterPaginationTableComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     FormlyMaterialModule,
     MatInputModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTableModule,
+    MatPaginatorModule 
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
