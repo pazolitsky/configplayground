@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-main-form',
@@ -9,11 +10,15 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class MainFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService ) { }
+
 
   ngOnInit(): void {
   }
 
+
+
+  @Input() id : number = 0;
   form = new FormGroup({});
   model = {
     domain: 'sqa-eu04.alma.exlibrisgroup.com',
@@ -53,6 +58,7 @@ export class MainFormComponent implements OnInit {
   ];
 
   onSubmit() {
+    this.displaySpinner = true;
     if (!this.form.valid) {
       return;
     }
@@ -72,17 +78,21 @@ export class MainFormComponent implements OnInit {
   }
 
   getConfiguration(url: string) {
-    let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?institute=TRAINING_1_INST&url=' + encodeURIComponent(url);
-    fetch(myurl).then(function(response) {
+      let myurl = 'http://il-borisg-vm:1801/primaws/rest/external/getResponse?institute=TRAINING_1_INST&url=' + encodeURIComponent(url);  fetch(myurl).then((response) => {
+      
       //alert('Configuration loaded from\n\n' + url);
-      response.json().then(function(json) {
+      response.json().then((json) => {
+        if(this.id == 1){
+          this.appService.view1JSON = json
+        }else if(this.id === 2){
+          this.appService.view2JSON = json
+        }
+      
         //alert("here is your json");
       });
     }).catch(function(e) {
       alert('Failed to load configuration from\n\n' + url + '\n\n' + e.toString());
-    }).finally(function() {
-
-    })
+    });
   }
 }
 
